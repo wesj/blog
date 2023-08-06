@@ -2,14 +2,14 @@ import fs from 'node:fs/promises';
 const entries_dir = './site/entries';
 const site_dir = './site';
 const template_file = "template.html";
-let articles_per_page = 2;
+let articles_per_page = 1000;
 
 const template = `
-<article>
+<li class="article">
     <h1>{{title}}</h1>
     <div class="date">{{date}}</div>
     <div class="description">{{description}}</div>
-</article>
+</li>
 `;
 
 async function openTemplate() {
@@ -114,7 +114,7 @@ async function create_new(page, template_doc, file_contents) {
             return template.replace(/{{title}}/g, f.title)
                         .replace(/{{date}}/g, new Date(f.birth_date).toDateString())
                         .replace(/{{description}}/g, f.description);
-        }).join("\n"))
+        }).reverse().join("\n"))
         .replace("{{created}}", new Date(file_contents[0].birth_date).toISOString())
         .replace("{{modified}}", new Date(file_contents[file_contents.length - 1].birth_date).toISOString())
         .replace("{{navigation}}", "");

@@ -1,0 +1,213 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Wes">
+        <meta name="description" content="I wonder if I can make the web look like lcars">
+        <meta charset="UTF-8">
+        <meta name="DC.created" content="{{created}}"/>
+        <meta name="DC.modified" content="{{modified}}"/>
+        <style type="text/css">
+:root {
+    --background: #000;
+    --on-background: #f40;
+    --primary: #fc9;
+    --on-primary: black;
+    --secondary: #f70;
+    --on-secondary: black;
+    --padding-xxl: 8em;
+    --padding-xl: 4em;
+    --padding-l: 2em;
+    --padding-m: 1em;
+    --padding-s: 0.5em;
+}
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--on-background);
+    font-family: 'Antonio', 'Arial Narrow', 'Avenir Next Condensed', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+content {
+    flex: 1;
+    overflow-y: scroll;
+}
+
+content:last-child {
+    min-height: 100%;
+    display: block;
+}
+
+.topLeft {
+    background-color: var(--primary);
+    color: var(--on-primary);
+    border-bottom-left-radius: var(--padding-l);
+    border-bottom-right-radius: var(--padding-s);
+    position: relative;
+    padding-left: var(--padding-xxl);
+    padding-bottom: var(--padding-m);
+}
+
+.topLeft > * {
+    background-color: var(--background);
+    color: var(--on-background);
+    margin: 0;
+    padding-bottom: var(--padding-m);
+    text-align: right;
+    z-index: 1;
+    position: relative;
+}
+
+.topLeft > *:not(.sidebar):last-of-type {
+    border-bottom-left-radius: var(--padding-m);
+}
+
+.topLeft:after {
+    content: " ";
+    display: block;
+    width: var(--padding-s);
+    height: var(--padding-s);
+    position: absolute;
+    right: 0;
+    background-image: radial-gradient(circle at bottom left, var(--primary), var(--primary) var(--padding-s), var(--background) var(--padding-s), var(--background));
+    display: none;
+}
+
+/*
+.topLeft > .sidebar:after {
+    content: " ";
+    display: block;
+    display: none;
+    width: var(--padding-s);
+    height: var(--padding-s);
+    position: absolute;
+    right: 0;
+    background-image: radial-gradient(circle at bottom left, var(--secondary), var(--secondary) var(--padding-s), var(--background) var(--padding-s), var(--background));
+}
+*/
+navigation {
+    padding: var(--padding-m);
+}
+
+navigation > ul {
+    background-color: var(--background);
+    color: var(--on-background);
+    padding: var(--padding-l);
+    border-bottom-left-radius: var(--padding-m);
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: end;
+    gap: var(--padding-m);
+}
+
+navigation > ul > li {
+    list-style-type: none;
+    display: inline-block;
+    margin: 0;
+}
+
+navigation > ul > li > a {
+    display: inline-block;
+    width: calc(10em - var(--padding-s) - var(--padding-m));
+    padding: var(--padding-s);
+    padding-top: var(--padding-m);
+    padding-right: var(--padding-m);
+    border-radius: 100vmax;
+    text-align: right;
+    background-color: var(--secondary);
+    color: var(--on-secondary);
+    text-transform: uppercase;
+    font-weight: bold;
+    user-select: none;
+    cursor: pointer;
+}
+
+li:hover {
+    filter: brightness(115%);
+}
+
+.bottomRight {
+    background-color: var(--primary);
+    color: var(--on-primary);
+    border-top-left-radius: var(--padding-l);
+    border-top-right-radius: var(--padding-s);
+    position: relative;
+    display: block;
+    padding-left: var(--padding-xxl);
+    padding-top: var(--padding-m);
+}
+
+.bottomRight:before {
+    content: " ";
+    background-color: red;
+    display: block;
+    width: var(--padding-s);
+    height: var(--padding-s);
+    position: absolute;
+    right: 0;
+    top: var(--padding-s);
+    background-image: radial-gradient(circle at top left, var(--primary), var(--primary) var(--padding-s), var(--background) var(--padding-s), var(--background));
+}
+
+.bottomRight > * {
+    background-color: var(--background);
+    color: var(--on-background);
+    padding: 1em;
+    margin: 0;
+}
+.bottomRight > *:first-child {
+    border-top-left-radius: var(--padding-m);
+}
+
+.sidebar {
+/*
+    position: relative;
+    top: 0;
+    margin-bottom: -1em;
+    margin-top: -2.5em;
+    margin-left: calc(-1 * var(--padding-xxl));
+    padding-top: var(--padding-s);
+    padding-right: calc(100% + var(--padding-s));
+    padding-bottom: var(--padding-s);
+
+    height: 2em;
+    z-index: 0;
+    border-bottom-left-radius: var(--padding-l);
+    border-bottom-right-radius: var(--padding-s);
+    border-top: var(--padding-s) solid black;
+    background-color: var(--secondary);
+    color: var(--on-secondary);
+*/
+}
+        </style>
+    </head>
+    <body>
+        <header class="topLeft">
+            <h1>My LCars</h1>
+        </header>
+        <navigation>
+            <ul>
+                <li><a>Home</a></li>
+                <li><a>Menu</a></li>
+            </ul>
+        </navigation>
+        <content class="bottomRight">
+            <h2>LCARs theming</h2>
+            <p>I was watching Picard Season 3 the other night (I know, I'm very very very behind), and was just struck again with how cool looking the UI is in star trek. Every attempt I've seen to try and put it on real PCs always looks kinda awful though. I was curious if you could recreate it with CSS.</p>
+            <p>Like all things on the web though, seems like someone <a href="https://www.thelcars.com/">already did this</a> and will put in well more time than I ever would. I played around for a bit with it here though, so I'll leave it. Maybe come back and try again some time in the future.</p>
+            <p>To get the heights to work, my original thought was to use layers. The other element has one layer and one border radius, the inner nodes have a different (black) background and their own.</p>
+            <p>It sorta works, but needs a lot of work. Just saving my place for now I guess.</p>
+        </content>
+    </body>
+</html>
