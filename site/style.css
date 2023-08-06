@@ -2,11 +2,11 @@
     --primary: #000814;
     --on-primary: white;
     --secondary: #ffc300;
-    --on-secondary: white;
+    --on-secondary: black;
     --sidebar-width: 150px;
     --header-height: 50px;
     --footer-height: 50px;
-    --navigation-height: 10px;
+    --navigation-height: 3em;
     --padding-l: 20px;
     --border-l: 5px;
     --border-s: 2px;
@@ -61,6 +61,25 @@ navigation:empty {
     display: none;
 }
 
+navigation > ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+navigation > ul > li > a {
+    padding: 1em;
+    width: calc(100% - 2em);
+    display: inline-block;
+    color: var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+}
+
+navigation > ul > li > a:hover {
+    background-color: var(--secondary);
+    color: var(--on-secondary);
+}
+
 content {
     overflow-y: scroll;
     grid-area: content;
@@ -90,6 +109,10 @@ li.article {
 .date {
     color: #DDDD;
     font-size: x-small;
+}
+
+navigation:not(:empty) {
+    border-right: var(--border-s) solid var(--secondary);
 }
 
 @media only screen 

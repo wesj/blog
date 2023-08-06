@@ -6,7 +6,7 @@ let articles_per_page = 1000;
 
 const template = `
 <li class="article">
-    <h1>{{title}}</h1>
+    <h1><a href="{{link}}">{{title}}</a></h1>
     <div class="date">{{date}}</div>
     <div class="description">{{description}}</div>
 </li>
@@ -76,7 +76,7 @@ function getTitle(file, stat, file_content) {
     return file;
 }
 
-const descriptionRegex = /\<description\>(.*)\<\/description\>/;
+const descriptionRegex = /\<meta name="description" content="(.*)"\>/;
 function getDescription(file, stat, file_content) {
     let m = file_content.match(descriptionRegex);
     if (m) {
@@ -101,6 +101,7 @@ async function get_new(last_date) {
             let file_content = await fs.readFile(file, { encoding: "utf8" });
             file_contents.push({
                 title: getTitle(file, stat, file_content),
+                link: "./entries/" + files[i],
                 birth_date: stat.birthtimeMs,
                 description: getDescription(file, stat, file_content)
             });
@@ -113,6 +114,7 @@ async function create_new(page, template_doc, file_contents) {
     const content = template_doc.replace("{{list-content}}", file_contents.map((f) => {
             return template.replace(/{{title}}/g, f.title)
                         .replace(/{{date}}/g, new Date(f.birth_date).toDateString())
+                        .replace(/{{link}}/g, f.link)
                         .replace(/{{description}}/g, f.description);
         }).reverse().join("\n"))
         .replace("{{created}}", new Date(file_contents[0].birth_date).toISOString())
